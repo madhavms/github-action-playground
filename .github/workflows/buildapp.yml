@@ -1,0 +1,38 @@
+name: Build and Deploy React App
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18.15'
+
+      - name: Install dependencies
+        working-directory: ./
+        run: npm install
+        
+      - name: Set environment variable
+        env:
+          GIT_API_URL: ${{ secrets.GIT_API_URL }}
+        run: |
+          echo "GIT_API_URL=${GIT_API_URL}" >> ./.env
+
+      - name: Build React app
+        working-directory: ./
+        run: npm run build
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@4.1.3
+        with:
+          branch: gh-pages
+          folder: ./build
