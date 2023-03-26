@@ -1,4 +1,5 @@
 import './App.css';
+import React from 'react';
 import GithubActionsComponent from './components/Github';
 import GitHubActionsStats from './components/SearchWorkflows';
 
