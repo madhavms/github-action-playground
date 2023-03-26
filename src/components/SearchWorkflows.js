@@ -33,7 +33,6 @@ const GitHubActionsStats = () => {
   useEffect(() => {
     const fetchRuns = async () => {
       try {
-        //https://api.github.com
         const response = await fetch(
           `${process.env.GIT_API_URL}/repos/${username}/${repo}/actions/runs?page=${page}&per_page=${rowsPerPage}`
         );
