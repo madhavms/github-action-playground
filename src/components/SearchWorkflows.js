@@ -82,7 +82,7 @@ const GitHubActionsStats = () => {
 
   return (
     <div>
-      <h2>Recent GitHub Actions Workflow Runs</h2>
+      <h2>{`Recent GitHub Actions Workflow Runs for:${username}`}</h2>
       <div style={{ display: "flex", marginBottom: 10 }}>
         <TextField
           label="Username"
