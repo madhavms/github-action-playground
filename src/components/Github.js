@@ -33,7 +33,7 @@ const Link = styled.a`
 const GithubActionsComponent = () => {
   return (
     <Container>
-      <Title>GitHub Actions</Title>
+      <Title>GitHub Action Playground</Title>
       <Text>GitHub Actions is a powerful platform for CI/CD workflows.</Text>
       <Text>
         Learn more about GitHub Actions on the{' '}
