@@ -25,10 +25,11 @@ const GitHubActionsStats = () => {
   const classes = useStyles();
   const [runs, setRuns] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [username, setUsername] = useState("");
-  const [repo, setRepo] = useState("");
+  const [username, setUsername] = useState("madhavms");
+  const [repo, setRepo] = useState("github-action-playground");
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [message, setMessage] = useState('');
 
   useEffect(() => {
     const fetchRuns = async () => {
@@ -39,6 +40,7 @@ const GitHubActionsStats = () => {
         const data = await response.json();
         console.log("data=", data);
         if (data.message === "Not Found") {
+          setMessage('No runs found.')
           throw new Error("No results found.");
         }
         setRuns(data.workflow_runs);
@@ -49,7 +51,7 @@ const GitHubActionsStats = () => {
         setLoading(false);
       }
     };
-    if (page !== 0) {
+    if (page !== 0 || !!username&&!!repo) {
       setLoading(true);
       fetchRuns();
     }
@@ -109,7 +111,7 @@ const GitHubActionsStats = () => {
         </Button>
       </div>
       {loading && <p>Loading...</p>}
-      {!loading && runs?.length === 0 && <p>No runs found.</p>}
+      <p>{message}</p>
       {!loading && runs?.length > 0 && (
         <div>
           <TableContainer
@@ -141,7 +143,6 @@ const GitHubActionsStats = () => {
             count={10}
             page={page}
             onChange={handleChangePage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
             style={{ marginTop: 20 }}
           />
         </div>
